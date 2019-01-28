@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BirdClassifier.Pages.Main_Page">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <Image Grid.Row="0" Grid.ColumnSpan="2"
+                   Aspect="AspectFit" 
+                   x:Name="SelectedImage"/>
+
+            <Label Grid.Row="1" Grid.ColumnSpan="2"
+                   x:Name="ClassifierResult_Label"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="Large"
+                   TextColor="Black" />
+            
+            <Frame Grid.Row="2" Grid.Column="0"
+                   BorderColor="Transparent"
+                   CornerRadius="2"
+                   BackgroundColor="LightSeaGreen">
+                   <Frame.GestureRecognizers>
+                       <TapGestureRecognizer Command="{Binding PickPhoto}"
+                                             CommandParameter="{Binding *}" />
+                   </Frame.GestureRecognizers>
+
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Text="Pick Photo"
+                       FontSize="Large"
+                       TextColor="Black" />
+            </Frame>
+
+            <Frame Grid.Row="2" Grid.Column="1"
+                   BorderColor="Transparent"
+                   CornerRadius="2"
+                   BackgroundColor="LightSeaGreen">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TakePhoto}"
+                                          CommandParameter="{Binding *}" />
+                </Frame.GestureRecognizers>
+
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Text="Take Photo"
+                       FontSize="Large"
+                       TextColor="Black" />
+            </Frame>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

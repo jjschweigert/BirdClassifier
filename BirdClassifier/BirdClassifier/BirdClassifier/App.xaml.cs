@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BirdClassifier.Pages;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace BirdClassifier
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new Main_Page();
         }
 
         protected override void OnStart()

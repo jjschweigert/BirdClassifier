@@ -10,14 +10,27 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CognitiveServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ICognitiveServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\Main_Page.xaml.cs">
+      <DependentUpon>Main_Page.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
+    <Folder Include="$(MSBuildThisFileDirectory)View Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\Main_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -1,0 +1,1 @@
+C:\Source\jjschweigert\BirdClassifier\BirdClassifier\BirdClassifier\BirdClassifier.UWP\BirdClassifier.UWP.csproj;x86
