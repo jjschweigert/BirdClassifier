@@ -1,7 +1,13 @@
-﻿using Plugin.Media;
+﻿using BirdClassifier.Helpers;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction.Models;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.Models;
+using Plugin.Media;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +39,8 @@ namespace BirdClassifier.Pages
             }
         }
 
+        private CognitiveServices Classifier;
+
         private string _ClassifierResult { get; set; }
         public string ClassifierResult
         {
@@ -54,6 +62,8 @@ namespace BirdClassifier.Pages
             PickPhoto = new Command(PickPhoto_Tapped);
             TakePhoto = new Command(TakePhoto_Tapped);
 
+            Classifier = new CognitiveServices();
+
             BindingContext = this;
         }
 
@@ -68,7 +78,7 @@ namespace BirdClassifier.Pages
 
             try
             {
-                file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+                file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
                 {
                     PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
                 });
@@ -91,7 +101,7 @@ namespace BirdClassifier.Pages
                         }
                     });
 
-                ClassifierResult = await ClassifyPhoto();
+                ClassifierResult = await Classifier.GetImageTags(file.GetStream());
             }
             catch(Exception ex)
             {
@@ -140,29 +150,11 @@ namespace BirdClassifier.Pages
                     }
                 });
 
-                ClassifierResult = await ClassifyPhoto();
+                ClassifierResult = await Classifier.GetImageTags(file.GetStream());
             }
             catch(Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-            }
-        }
-
-        public async Task<string> ClassifyPhoto()
-        {
-            switch(currcount)
-            {
-                case 0:
-
-                    return "Photo Picked";
-
-                case 1:
-
-                    return "Photo Taken";
-
-                default:
-
-                    return "";
             }
         }
     }
